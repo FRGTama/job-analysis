@@ -94,6 +94,8 @@ streamlit run app.py
 
 Open http://localhost:8501 in your browser.
 
+The dashboard auto-detects missing data: if `cleaned_jobs.csv` is not found, it runs the crawler and pipeline automatically on first launch.
+
 ## Project Structure
 
 ```
