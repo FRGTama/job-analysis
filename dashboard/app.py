@@ -7,10 +7,11 @@ import pandas as pd
 import streamlit as st
 from collections import Counter
 import altair as alt
+from pathlib import Path
 
 st.set_page_config(page_title="Vietnam IT Job Market", layout="wide")
-
-DATA_PATH = "../data/cleaned_jobs.csv"
+PROJECT = Path(__file__).resolve().parent.parent
+DATA_PATH = PROJECT / "data/cleaned_jobs.csv"
 
 
 @st.cache_data
@@ -28,7 +29,6 @@ def parse_skills_list(skills_str):
 
 # ──────────────────────────────────────────────────────────────────────
 df = load_data()
-
 st.title("Vietnam IT Job Market Analytics")
 st.markdown(f"**{len(df):,}** job postings analyzed | {df['company_name'].nunique():,} companies | {df['city'].nunique()} cities")
 
@@ -77,7 +77,7 @@ elif page == "Skills":
     st.header("Skill Demand Analysis")
 
     all_skills = []
-    for s in df["skills"].dropna():
+    for s in df["skills_normalized"].dropna():
         all_skills.extend(parse_skills_list(s))
 
     skill_counts = Counter(all_skills)
@@ -107,7 +107,7 @@ elif page == "Skills":
 
     level_df = df[df["experience_level"] == level_filter]
     level_skills = []
-    for s in level_df["skills"].dropna():
+    for s in level_df["skills_normalized"].dropna():
         level_skills.extend(parse_skills_list(s))
 
     if level_skills:

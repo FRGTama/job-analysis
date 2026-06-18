@@ -18,14 +18,13 @@ Understanding the IT job market is critical for students, job seekers, and emplo
 ## Data Pipeline
 
 ```
-Crawler → raw_jobs.csv → Cleaning → cleaned_jobs.csv → SQL → Dashboard
+Crawler → raw_jobs.csv → analysis.py (clean + chart) → cleaned_jobs.csv + PNGs → Dashboard
 ```
 
-1. **Crawler** (`crawler/`): Playwright-based crawler hits ybox.vn CDN API, collecting ~6,000 job postings.
-2. **Cleaning** (`notebooks/01_data_cleaning.ipynb`): Normalises locations, salaries, skills, and experience levels.
-3. **Analysis** (`notebooks/02_analysis.ipynb`): Exploratory analysis with charts and statistical summaries.
-4. **SQL** (`sql/`): Schema and business queries for structured analysis.
-5. **Dashboard** (`dashboard/app.py`): Streamlit app with Overview, Skills, and Salary pages.
+1. **Crawler** (`crawler/crawl_jobs.py`): Playwright-based crawler hits ybox.vn CDN API, collecting ~6,000 job postings. Supports `-page N` CLI flag for limiting pages during development.
+2. **Cleaning + Analysis** (`analysis.py`): Normalizes locations, salaries, skills, and experience levels; generates 7 chart PNGs to `dashboard/screenshots/`.
+3. **SQL** (`sql/`): Schema and business queries for structured analysis.
+4. **Dashboard** (`dashboard/app.py`): Streamlit app with Overview, Skills, and Salary pages.
 
 ## Dataset
 
@@ -40,10 +39,10 @@ Crawler → raw_jobs.csv → Cleaning → cleaned_jobs.csv → SQL → Dashboard
 
 - Rate-limited Playwright crawler with checkpoint recovery
 - Pure-function parsing module (`parse_job.py`) — no I/O, testable
-- Skill normalization dictionary (80+ entries)
+- Skill normalization dictionary (103 entries)
 - SQL schema with joined analytics queries
 - Interactive Streamlit dashboard (3 pages)
-- Jupyter notebooks for reproducible analysis
+- Single-script cleaning + analysis pipeline (no Jupyter dependency)
 
 ## Tech Stack
 
@@ -52,7 +51,7 @@ Crawler → raw_jobs.csv → Cleaning → cleaned_jobs.csv → SQL → Dashboard
 | Crawling | Python, Playwright |
 | Processing | Pandas, NumPy |
 | Storage | CSV, SQLite (SQL schema) |
-| Analysis | Matplotlib, Seaborn, Jupyter |
+| Analysis | Matplotlib, Seaborn |
 | Dashboard | Streamlit |
 
 ## How to Run
@@ -73,21 +72,20 @@ python crawl_jobs.py
 
 Output: `data/raw_jobs.csv` (~6,000 rows)
 
-### 3. Clean the data
-
+To limit pages (fast iteration):
 ```bash
-jupyter notebook notebooks/01_data_cleaning.ipynb
+python crawl_jobs.py -page 3
 ```
 
-Output: `data/cleaned_jobs.csv`
-
-### 4. Run analysis
+### 3. Clean data & generate charts
 
 ```bash
-jupyter notebook notebooks/02_analysis.ipynb
+python analysis.py
 ```
 
-### 5. Launch dashboard
+Outputs: `data/cleaned_jobs.csv` + 7 chart PNGs in `dashboard/screenshots/`
+
+### 4. Launch dashboard
 
 ```bash
 cd dashboard
@@ -100,21 +98,21 @@ Open http://localhost:8501 in your browser.
 
 ```
 job-market-analysis/
+├── analysis.py                   # Cleaning + analysis pipeline
 ├── crawler/
-│   ├── parse_job.py            # Pure parsing functions
-│   └── crawl_jobs.py           # Playwright crawler + CDN API
+│   ├── __init__.py
+│   ├── parse_job.py              # Pure parsing functions
+│   └── crawl_jobs.py             # Playwright crawler + CDN API
 ├── data/
-│   ├── raw_jobs.csv            # Raw crawler output
-│   ├── cleaned_jobs.csv        # Post-cleaning output
-│   └── skills_dictionary.csv   # Skill normalization lookup
-├── notebooks/
-│   ├── 01_data_cleaning.ipynb  # Raw → Cleaned pipeline
-│   └── 02_analysis.ipynb       # EDAA + visualizations
+│   ├── raw_jobs.csv              # Raw crawler output (gitignored)
+│   ├── cleaned_jobs.csv          # Post-cleaning output (gitignored)
+│   └── skills_dictionary.csv     # Skill normalization lookup
 ├── sql/
-│   ├── schema.sql              # Table definitions
-│   └── queries.sql             # Business analytics queries
+│   ├── schema.sql                # Table definitions
+│   └── queries.sql               # Business analytics queries
 ├── dashboard/
-│   └── app.py                  # Streamlit dashboard
+│   ├── app.py                    # Streamlit dashboard
+│   └── screenshots/              # Chart PNGs (gitignored)
 ├── README.md
 └── requirements.txt
 ```
