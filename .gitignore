@@ -1,4 +1,2 @@
-data/cleaned_jobs.csv
-data/raw_jobs.csv
-crawler/___pycache__
+__pycache__/
 dashboard/screenshots

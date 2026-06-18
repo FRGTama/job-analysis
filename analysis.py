@@ -24,7 +24,7 @@ sns.set_palette("Set2")
 
 
 
-PROJECT = Path(__file__).resolve().parent.parent
+PROJECT = Path(__file__).resolve().parent
 DATA = PROJECT / "data"
 RAW = DATA / "raw_jobs.csv"
 CLEANED = DATA / "cleaned_jobs.csv"
