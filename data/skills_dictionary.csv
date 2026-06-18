@@ -1,0 +1,104 @@
+raw_skill,normalized_skill,category
+python,Python,Programming Language
+py,Python,Programming Language
+python3,Python,Programming Language
+java,Java,Programming Language
+javascript,JavaScript,Programming Language
+js,JavaScript,Programming Language
+ecmascript,JavaScript,Programming Language
+typescript,TypeScript,Programming Language
+ts,TypeScript,Programming Language
+react,React,Frontend
+reactjs,React,Frontend
+react.js,React,Frontend
+node,Node.js,Backend
+nodejs,Node.js,Backend
+node.js,Node.js,Backend
+angular,Angular,Frontend
+angularjs,Angular,Frontend
+vue,Vue.js,Frontend
+vuejs,Vue.js,Frontend
+flutter,Flutter,Mobile
+react native,React Native,Mobile
+reactnative,React Native,Mobile
+php,PHP,Backend
+.net,.NET/C#,Backend
+c#,.NET/C#,Programming Language
+csharp,.NET/C#,Programming Language
+c++,C++,Programming Language
+cpp,C++,Programming Language
+ruby,Ruby,Programming Language
+golang,Go,Programming Language
+go,Go,Programming Language
+rust,Rust,Programming Language
+kotlin,Kotlin,Mobile
+swift,Swift,Mobile
+dart,Dart,Mobile
+sql,SQL,Database
+mysql,SQL,Database
+postgresql,SQL,Database
+oracle,SQL,Database
+mongodb,MongoDB,Database
+nosql,MongoDB,Database
+aws,AWS,Cloud
+amazon web services,AWS,Cloud
+azure,Azure,Cloud
+gcp,GCP,Cloud
+google cloud,GCP,Cloud
+docker,Docker,DevOps
+kubernetes,Kubernetes,DevOps
+k8s,Kubernetes,DevOps
+devops,DevOps,DevOps
+ci/cd,CI/CD,DevOps
+jenkins,CI/CD,DevOps
+gitlab,CI/CD,DevOps
+machine learning,Machine Learning,AI/ML
+deep learning,Machine Learning,AI/ML
+ml,Machine Learning,AI/ML
+ai,AI,AI/ML
+artificial intelligence,AI,AI/ML
+data engineer,Data Engineering,Data
+data analyst,Data Engineering,Data
+data science,Data Engineering,Data
+blockchain,Blockchain,Blockchain
+solidity,Blockchain,Blockchain
+web3,Blockchain,Blockchain
+security,Security,Infrastructure
+cyber security,Security,Infrastructure
+embedded,Embedded/IoT,Infrastructure
+iot,Embedded/IoT,Infrastructure
+firmware,Embedded/IoT,Infrastructure
+network,Networking,Infrastructure
+cisco,Networking,Infrastructure
+tester,Testing/QA,QA
+testing,Testing/QA,QA
+qa,Testing/QA,QA
+linux,Linux,Infrastructure
+unix,Linux,Infrastructure
+git,Git,DevOps
+agile,Agile/Scrum,Methodology
+scrum,Agile/Scrum,Methodology
+sap,SAP,Enterprise
+salesforce,Salesforce,Enterprise
+android,Android,Mobile
+ios,iOS,Mobile
+html,HTML/CSS,Frontend
+css,HTML/CSS,Frontend
+html5,HTML/CSS,Frontend
+css3,HTML/CSS,Frontend
+rest api,REST API,Backend
+restful,REST API,Backend
+graphql,GraphQL,Backend
+excel,Analytics Tools,Data
+power bi,Analytics Tools,Data
+tableau,Analytics Tools,Data
+looker,Analytics Tools,Data
+laravel,Laravel,Backend
+django,Django,Backend
+spring,Spring,Backend
+tensorflow,ML Frameworks,AI/ML
+pytorch,ML Frameworks,AI/ML
+tiktok,TikTok,Social Media
+lập trình python,Python,Programming Language
+lập trình java,Java,Programming Language
+lập trình web,Web Development,Web
