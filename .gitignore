@@ -1,4 +1,6 @@
 data/cleaned_jobs.csv
 data/raw_jobs.csv
-crawler/___pycache__
-dashboard/screenshots
+crawler/__pycache__/
+__pycache__/
+*.pyc
+dashboard/screenshots/

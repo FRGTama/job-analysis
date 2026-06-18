@@ -5,7 +5,7 @@ Input:  data/raw_jobs.csv
 Output: data/cleaned_jobs.csv
 
 Run:
-    python notebooks/01_data_cleaning.py
+    python analysis.py
 """
 
 import re
@@ -226,10 +226,10 @@ def run_pipeline() -> None:
 02 — Analysis & Insights
 =========================
 Input:  data/cleaned_jobs.csv
-Output: chart PNGs → dashboard/
+Output: chart PNGs → dashboard/screenshots/
 
 Run:
-    python notebooks/02_analysis.py
+    python analysis.py
 """
 
 
@@ -240,7 +240,7 @@ Run:
 def load_data() -> pd.DataFrame:
     if not CLEANED.exists():
         raise FileNotFoundError(
-            f"{CLEANED} not found. Run cleaning first: python notebooks/01_data_cleaning.py"
+            f"{CLEANED} not found. Run cleaning first: python analysis.py"
         )
     df = pd.read_csv(CLEANED)
     df["is_salary_public"] = df["is_salary_public"].astype(bool)
