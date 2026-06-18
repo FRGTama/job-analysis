@@ -3,67 +3,20 @@ Vietnam IT Job Market Dashboard — Streamlit
 3 pages: Overview | Skills | Salary
 """
 
-import subprocess
-import sys
-from collections import Counter
-from pathlib import Path
-
-import altair as alt
 import pandas as pd
 import streamlit as st
+from collections import Counter
+import altair as alt
+from pathlib import Path
 
 st.set_page_config(page_title="Vietnam IT Job Market", layout="wide")
 PROJECT = Path(__file__).resolve().parent.parent
-RAW_PATH = PROJECT / "data/raw_jobs.csv"
-CLEANED_PATH = PROJECT / "data/cleaned_jobs.csv"
-
-
-# ──────────────────────────────────────────────────────────────────────
-# Auto-pipeline: run crawl + analysis if data is missing
-# ──────────────────────────────────────────────────────────────────────
-def _run_pipeline():
-    if not CLEANED_PATH.exists():
-        with st.spinner("Preparing data pipeline ..."):
-            if not RAW_PATH.exists():
-                st.info("Crawling job data from ybox.vn (~71s for full crawl) ...")
-                r = subprocess.run(
-                    [sys.executable, "crawler/crawl_jobs.py"],
-                    cwd=PROJECT,
-                    capture_output=True,
-                    text=True,
-                )
-                if r.returncode != 0:
-                    st.error(f"Crawl failed:\n{r.stderr[-800:]}")
-                    st.stop()
-            st.info("Cleaning data and generating charts ...")
-            r = subprocess.run(
-                [sys.executable, "analysis.py"],
-                cwd=PROJECT,
-                capture_output=True,
-                text=True,
-            )
-            if r.returncode != 0:
-                st.error(f"Analysis failed:\n{r.stderr[-800:]}")
-                st.stop()
-        st.success("Pipeline complete!")
-        return True
-    return False
-
-
-if "pipeline_done" not in st.session_state:
-    st.session_state.pipeline_done = False
-
-if not st.session_state.pipeline_done:
-    if _run_pipeline():
-        st.session_state.pipeline_done = True
-        st.rerun()
-    else:
-        st.session_state.pipeline_done = True
+DATA_PATH = PROJECT / "data/cleaned_jobs.csv"
 
 
 @st.cache_data
 def load_data():
-    df = pd.read_csv(CLEANED_PATH)
+    df = pd.read_csv(DATA_PATH)
     df["is_salary_public"] = df["is_salary_public"].astype(bool)
     return df
 
